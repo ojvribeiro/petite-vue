@@ -28,8 +28,8 @@
                     Search
                 </button>
             </form>
-            <article v-if="store.userData.url" class="py-4 border-2 border-blue-100 rounded-md px-3 w-[220px] mt-4">
-                <a :href="store.userData.url">
+            <article v-if="store.userData.html_url" class="py-4 border-2 border-blue-100 rounded-md px-3 w-[220px] mt-4">
+                <a :href="store.userData.html_url" target="_blank">
                     <img :src="store.userData.avatar_url" alt="" class="rounded-full w-12 shadow">
                     <h2 class="text-sm text-zinc-800 font-bold">{{store.userData?.name}}</h2>
                     <p class="text-sm text-zinc-800">
