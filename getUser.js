@@ -9,7 +9,7 @@ const store = reactive({
 
         this.load = true;
 
-        const githubUserSearch = await fetch(`https:api.github.com/users/${this.searchText}`);
+        const githubUserSearch = await fetch(`https://api.github.com/users/${this.searchText}`);
         const data = await githubUserSearch.json();
         console.log(data)
 
