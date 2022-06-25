@@ -16,7 +16,7 @@
         <h1 class="text-xl text-zinc-800 font-bold mb-4">Github User Search</h1>
         <div id="githubUserSearch">
             <form @submit.prevent="store.search">
-                <label class="text-sm text-zinc-800 block font-bold">User</label>
+                <label class="text-sm text-zinc-800 block font-bold">Username</label>
                 <input v-model="store.searchText" type="search"
                     class="p-2 shadow ring-2 ring-blue-100 rounded-md focus:border-none">
                 <button v-if="store.load" @clicl="store.search"
