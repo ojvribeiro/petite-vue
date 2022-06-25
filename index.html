@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Petite Vue</title>
+</head>
+
+<body>
+
+    <div class="container mx-auto px-2 py-12">
+        <h1 class="text-xl text-zinc-800 font-bold mb-4">Github User Search</h1>
+        <div id="githubUserSearch">
+            <form @submit.prevent="store.search">
+                <label class="text-sm text-zinc-800 block font-bold">User</label>
+                <input v-model="store.searchText" type="search"
+                    class="p-2 shadow ring-2 ring-blue-100 rounded-md focus:border-none">
+                <button v-if="store.load" @clicl="store.search"
+                    class="px-3 py-2 rounded-md shadow  ring-2 ring-blue-100 ml-2 text-zinc-900 font-bold hover:ring-4 transition-all active:ring-blue-400">
+                    Searching...
+                </button>
+                <button v-else @clicl="store.search"
+                    class="px-3 py-2 rounded-md shadow  ring-2 ring-blue-100 ml-2 text-zinc-900 font-bold hover:ring-4 transition-all active:ring-blue-400">
+                    Search
+                </button>
+            </form>
+            <article v-if="store.userData.url" class="py-4 border-2 border-blue-100 rounded-md px-3 w-[220px] mt-4">
+                <a :href="store.userData.url">
+                    <img :src="store.userData.avatar_url" alt="" class="rounded-full w-12 shadow">
+                    <h2 class="text-sm text-zinc-800 font-bold">{{store.userData?.name}}</h2>
+                    <p class="text-sm text-zinc-800">
+                        {{store.userData?.bio}}
+                    </p>
+                </a>
+            </article>
+        </div>
+    </div>
+
+    <script type="module">
+
+        import { createApp, reactive } from "http://unpkg.com/petite-vue?module";
+
+        const store = reactive({
+            searchText: "",
+            userData: {},
+            load: false,
+
+            async search() {
+
+                this.load = true;
+
+                const githubUserSearch = await fetch(`https:api.github.com/users/${this.searchText}`);
+                const data = await githubUserSearch.json();
+                console.log(data)
+
+                this.userData = data;
+
+                this.load = false;
+            }
+        })
+
+        createApp({ store }).mount('#githubUserSearch')
+
+    </script>
+
+</body>
+
+</html>
